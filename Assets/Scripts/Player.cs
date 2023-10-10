@@ -17,13 +17,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Debug.Log("Ariel Alejandro Vega");
-        Move();
     }
 
-    public void Move()
+    public void Move(float horizontalInput, float verticalInput)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        
         transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
         transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
     }
