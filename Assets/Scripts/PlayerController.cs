@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        player.Move(horizontalInput,verticalInput);
+        player.Move(horizontalInput, verticalInput);
+
     }
+
 }

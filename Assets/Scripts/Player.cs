@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    private float speed;
+    private float limitRangeX;
+    private float limitRangeY;
+    
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Hello ");
         transform.position = Vector3.zero;
         speed = 3.5f;
+        limitRangeX = 8f;
+        limitRangeY = 4.15f;
     }
 
     // Update is called once per frame
@@ -21,8 +26,39 @@ public class Player : MonoBehaviour
 
     public void Move(float horizontalInput, float verticalInput)
     {
-        
-        transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
-        transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
+        if(gameObject.transform.position.x < -limitRangeX)
+        {
+            gameObject.transform.position = new Vector3(-limitRangeX, 
+                                                        gameObject.transform.position.y, 
+                                                        gameObject.transform.position.z);
+        }else if (gameObject.transform.position.x > limitRangeX)
+        {
+            gameObject.transform.position = new Vector3(limitRangeX,
+                                                        gameObject.transform.position.y,
+                                                        gameObject.transform.position.z);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
+        }
+
+        if (gameObject.transform.position.y < -limitRangeY)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                                                        -limitRangeY,
+                                                        gameObject.transform.position.z);
+        }
+        else if (gameObject.transform.position.y > limitRangeY)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                                                        limitRangeY,
+                                                        gameObject.transform.position.z);
+        }
+        else
+        {
+            transform.Translate(Vector3.up * speed * verticalInput * Time.deltaTime);
+        }
+
+        Debug.Log(transform.position);
     }
 }
